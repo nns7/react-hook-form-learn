@@ -3,7 +3,11 @@ import "./App.css";
 import { FieldValues, useForm } from "react-hook-form";
 
 function App() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
@@ -13,6 +17,7 @@ function App() {
         <div>
           <label htmlFor="email">Email</label>
           <input id="email" {...register("email", { required: true })} />
+          {errors.email && <div>入力が必須の項目です</div>}
         </div>
         <div>
           <label htmlFor="password">Password</label>
