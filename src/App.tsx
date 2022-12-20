@@ -12,7 +12,7 @@ function App() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="email">Email</label>
-          <input id="email" {...register("email")} />
+          <input id="email" {...register("email", { required: true })} />
         </div>
         <div>
           <label htmlFor="password">Password</label>
