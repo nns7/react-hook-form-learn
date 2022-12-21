@@ -11,7 +11,7 @@ function App() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<Login>({
     criteriaMode: "all",
     defaultValues: { email: "test@example.com", password: "test" },
@@ -55,7 +55,9 @@ function App() {
             <div>{errors.password.types.pattern}</div>
           )}
         </div>
-        <button type="submit">ログイン</button>
+        <button type="submit" disabled={!isDirty}>
+          ログイン
+        </button>
       </form>
     </div>
   );
