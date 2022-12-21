@@ -15,6 +15,7 @@ function App() {
   } = useForm<Login>({
     criteriaMode: "all",
     defaultValues: { email: "test@example.com", password: "test" },
+    reValidateMode: "onBlur",
   });
   const onSubmit = (data: FieldValues) => console.log(data);
 
