@@ -11,11 +11,11 @@ function App() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty },
+    formState: { errors, isDirty, isValid },
   } = useForm<Login>({
     criteriaMode: "all",
-    defaultValues: { email: "test@example.com", password: "test" },
-    reValidateMode: "onBlur",
+    defaultValues: { email: "", password: "" },
+    mode: "onChange",
   });
   const onSubmit = (data: FieldValues) => console.log(data);
 
@@ -55,7 +55,7 @@ function App() {
             <div>{errors.password.types.pattern}</div>
           )}
         </div>
-        <button type="submit" disabled={!isDirty}>
+        <button type="submit" disabled={!isDirty || !isValid}>
           ログイン
         </button>
       </form>
