@@ -5,6 +5,8 @@ import { FieldValues, useForm } from "react-hook-form";
 type Login = {
   email: string;
   password: string;
+  showAge: boolean;
+  age: number;
 };
 
 function App() {
@@ -12,11 +14,13 @@ function App() {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid },
+    watch,
   } = useForm<Login>({
     criteriaMode: "all",
     defaultValues: { email: "", password: "" },
     mode: "onChange",
   });
+  const watchShowAge = watch("showAge", false);
   const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
@@ -55,6 +59,23 @@ function App() {
             <div>{errors.password.types.pattern}</div>
           )}
         </div>
+        <div>
+          <label htmlFor="age">Age</label>
+        </div>
+        <div>
+          <input type="checkbox" {...register("showAge")} />
+        </div>
+        {watchShowAge && (
+          <div>
+            <input
+              type="number"
+              {...register("age", {
+                min: { value: 50, message: "50以上を入力してください。" },
+              })}
+            />
+            {errors.age?.message && <div>{errors.age.message}</div>}
+          </div>
+        )}
         <button type="submit" disabled={!isDirty || !isValid}>
           ログイン
         </button>
