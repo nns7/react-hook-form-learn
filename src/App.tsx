@@ -12,7 +12,10 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Login>({ criteriaMode: "all" });
+  } = useForm<Login>({
+    criteriaMode: "all",
+    defaultValues: { email: "test@example.com", password: "test" },
+  });
   const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
@@ -34,7 +37,7 @@ function App() {
             {...register("password", {
               required: { value: true, message: "入力が必須の項目です。" },
               pattern: {
-                value: new RegExp("/^[A-Za-z]+$"),
+                value: new RegExp(/^[A-Za-z]+$/),
                 message: "アルファベットのみ入力してください。",
               },
               minLength: { value: 8, message: "8文字以上入力してください。" },
